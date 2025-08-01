@@ -32,16 +32,18 @@ define('BASEPATH', 'MINIMVC');
  * 
  * @param type $className
  */
-function __autoload($className){
+spl_autoload_register(function ($className) {
     include_once "system/libs/" . $className . ".php";
-}
+});
 
 /**
  * Include your configration file.
  */
 include_once "app/config/config.php";
 
-$parser = new URLParser();
+$router = new Router();
+include_once "app/routes.php";
+$router->dispatch();
 
 ob_flush();
 ?>
